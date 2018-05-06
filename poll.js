@@ -9,6 +9,7 @@ class Poll extends EventEmitter {
         this.maxVotes = maxVotes;
         this.votes = 0;
         this.on(CONFIG.EVENTS.VOTE, (val) => {
+            this.emit(CONFIG.EVENTS.PRINT, `Voting for "${val}"`);
             if (this.votes < this.maxVotes) this.emit(CONFIG.EVENTS.COUNT, val);
             else this.emit(CONFIG.EVENTS.LIMIT, val);
         });
